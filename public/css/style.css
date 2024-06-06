@@ -1,0 +1,126 @@
+:root {
+    --color-primary: #060606;
+    --color-active: #e65f2b;
+}
+
+body {
+    background-color: var(--color-primary) !important;
+}
+
+main.content {
+    background-color: #ebdfd7;
+}
+.sidebar {
+    background-color: var(--color-primary) !important;
+}
+
+li.active {
+    background-color: white !important;
+    border-radius: 1rem !important;
+    width: 15rem;
+    text-align: center;
+}
+
+.active .sidebar-link {
+    color: var(--color-active) !important;
+}
+
+.simplebar-content {
+    background-color: #060606 !important;
+}
+
+.sidebar-content {
+    background-color: var(--color-primary) !important;
+}
+
+.sidebar-nav {
+    background-color: var(--color-primary) !important;
+}
+
+a.sidebar-link {
+    background-color: var(--color-primary) !important;
+}
+
+.sidebar-item.active .sidebar-link:hover,
+.sidebar-item.active > .sidebar-link {
+    background: linear-gradient(
+        90deg,
+        rgba(59, 125, 221, 0.1),
+        rgba(59, 125, 221, 0.088) 50%,
+        transparent
+    );
+    background-color: white !important;
+    border: none !important;
+    border-left-color: none !important;
+    font-weight: 600 !important;
+    color: #e9ecef;
+    border-radius: 1rem !important;
+}
+
+ul.sidebar-nav {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+li.sidebar-item {
+    font-size: 0.75rem !important;
+    background-color: #060606 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600 !important;
+}
+
+span {
+    font-weight: 800 !important;
+}
+
+table tr td,
+table thead {
+    font-size: 0.8rem !important;
+}
+
+.card {
+    box-shadow: 0 0 0.875rem 0 rgba(33, 37, 41, 0.05);
+    margin-bottom: 24px;
+    border-radius: 1.5rem 0.5rem 1.5rem 0.5rem;
+}
+.card-header:first-child {
+    border-radius: var(--bs-card-inner-border-radius)
+        var(--bs-card-inner-border-radius) 0 0;
+    border-radius: 3rem 0.5rem 0 0;
+}
+.card-header{
+    border-radius: 3rem 0.5rem 0 0 !important;
+}
+.card-body {
+    box-sizing: border-box;
+    overflow-x: scroll;
+    scrollbar-width: none; /* atau auto, none */
+}
+.card-body::-webkit-scrollbar {
+  width: 80% !important; /* Lebar scrollbar vertical */
+  height: 1rem !important; /* Tinggi scrollbar horizontal */
+}
+.card-title {
+    padding: 2rem 0 0 0;
+
+    color: black !important;
+    border-radius: 3rem 0.5rem 0 0;
+}
+
+.modal-body {
+    background-color: #ebdfd7;
+}
+
+a{
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: 700 !important;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
