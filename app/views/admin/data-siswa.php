@@ -4,7 +4,23 @@
             <div class="card-header">
                 <h5 class="card-title mb-0">Data Siswa</h5>
             </div>
+            <div class="head-table">
+                <div class="row px-3">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <form action="<?= BASEURL ?>/admin/siswa" method="post">
+                            <div class="input-group mb-3">
+                                <input type="text" name="keyword" class="form-control" placeholder="cari data siswa" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <button class="btn btn-primary" type="submit" id="button-addon2">cari</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
+
                 <table class="table ">
                     <thead>
                         <tr>
@@ -103,7 +119,7 @@
                                                 <select class="form-control" name="id_kelas" id="id_kelas">
                                                     <option value="pilih">pilih kelas</option>
                                                     <?php
-                                                    
+
                                                     foreach ($data['kelas'] as $kelas) :
                                                     ?>
                                                         <option value="<?= $kelas['id'] ?>"><?= $kelas['class_name'] ?></option>

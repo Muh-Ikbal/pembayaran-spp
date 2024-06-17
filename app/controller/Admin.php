@@ -6,12 +6,6 @@ class Admin extends Controller
         Midleware::checkLogin();
         Midleware::checkAdmin();
     }
-    public function index()
-    {
-        $this->view('templates-admin/header');
-        $this->view('admin/index');
-        $this->view('templates-admin/footer');
-    }
     public function kelas()
     {
         $data['kelas'] = $this->model('kelas_model')->getAllClass();
@@ -28,14 +22,7 @@ class Admin extends Controller
         $this->view('admin/data-siswa', $data);
         $this->view('templates-admin/footer');
     }
-    public function history()
-    {
-        $data['pembayaran'] = $this->model('pembayaran_model')->getAllBills();
-        $this->view('templates-admin/header');
-        $this->view('admin/history-pembayaran', $data);
-        $this->view('templates-admin/footer');
-    }
-    public function users()
+       public function users()
     {
         $data['users'] = $this->model('user_model')->getAllUser();
         $this->view('templates-admin/header');
@@ -139,12 +126,13 @@ class Admin extends Controller
     }
     public function delKelas($id)
     {
-        if ($this->model('kelas_model')->delKelas($id) > 0) {
+        $result = $this->model('kelas_model')->delKelas($id) ;
+        if (is_numeric($result)&&$result>0) {
             Flasher::setFlasher('berhasil', 'data ', ' dihapus', 'success', 'kelas');
             header('Location:' . BASEURL . '/admin/kelas');
             exit;
         } else {
-            Flasher::setFlasher('gagal', 'data ', ' dihapus', 'danger', 'kelas');
+            Flasher::setFlasher('gagal', 'data ', ' dihapus : '.$result, 'danger', 'kelas');
             header('Location:' . BASEURL . '/admin/kelas');
         }
     }

@@ -12,9 +12,21 @@ class Siswa_model
     }
     public function getAllSiswa()
     {
-        $this->db->query('SELECT students.*, classes.* FROM ' . $this->table . ' LEFT JOIN classes on students.class_id = classes.id ORDER BY nis');
+        $where = '';
+        $bind_values = []; // Array untuk menyimpan nilai parameter yang akan diikat
+
+        if (isset($_POST['keyword'])) {
+            $keyword = $_POST['keyword'];
+            $where = 'WHERE nis LIKE :keyword OR name LIKE :keyword'; // Perbaiki typo di sini (:keyword)
+            $bind_values[':keyword'] = '%' . $keyword . '%'; // Menyimpan nilai parameter
+        }
+        $this->db->query('SELECT students.*, classes.* FROM ' . $this->table . ' LEFT JOIN classes on students.class_id = classes.id ' . $where . ' ORDER BY nis');
+        foreach ($bind_values as $key => $value) {
+            $this->db->bind($key, $value);
+        }
         return $this->db->result();
     }
+
     public function getSiswa($id)
     {
         $this->db->query('SELECT students.*, classes.* FROM ' . $this->table . ' LEFT JOIN classes on students.class_id = classes.id WHERE id_student = :id_student ORDER BY nis');
@@ -93,6 +105,55 @@ class Siswa_model
             return $row;
         } else {
             return []; // Return an empty array if no results
+        }
+    }
+
+    public function updtAvatar($data, $file)
+    {
+        try {
+            $this->stmt = 'UPDATE ' . $this->table . ' SET gambar=:gambar WHERE id_student=:id';
+            $this->db->query($this->stmt);
+            $this->db->bind('gambar', $file['profile']['name']);
+            $this->db->bind('id', $data['id_user']);
+            $dirTo = 'img/avatars/';
+            $dirFrom = $file['profile']['tmp_name'];
+            $file_name = basename($file['profile']['name']);
+            $target_file = $dirTo . $file_name;
+
+            // Check if the file has been successfully uploaded
+            if (!move_uploaded_file($dirFrom, $target_file)) {
+                // Handle the error, maybe log it or show an error message
+                return false;
+            }
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function updtPassword($data)
+    {
+        try {
+            $this->stmt = 'UPDATE ' . $this->table . ' SET password=:pass WHERE id_student=:id';
+            $this->db->query($this->stmt);
+            $this->db->bind('pass', password_hash($data['new'], PASSWORD_BCRYPT));
+            $this->db->bind('id', $data['id']);
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function getSiswaForBill($id){
+        try{
+
+            $this->db->query('SELECT students.*, classes.* FROM ' . $this->table . ' LEFT JOIN classes on students.class_id = classes.id WHERE nis = :id_student ORDER BY nis');
+            $this->db->bind('id_student', $id);
+            $this->db->execute();
+            return $this->db->rowCount();
+        }catch(Exception $e){
+            return $e->getMessage();
         }
     }
 }

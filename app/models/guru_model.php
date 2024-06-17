@@ -70,4 +70,25 @@ class Guru_model
             return $e->getMessage();
         }
     }
+
+    public function getGuruByClassId($class_id){
+        try{
+            $this->stmt = 'SELECT * FROM '.$this->table. ' JOIN users on teachers.id_user = users.id_user WHERE class_id = :classid';
+            $this->db->query($this->stmt);
+            $this->db->bind('classid',$class_id);
+            return $this->db->single();
+        }catch(Exception $e){
+            return $e->getMessage();    
+        }
+    }
+    public function getGuruByUserId($user_id){
+        try{
+            $this->stmt = 'SELECT * FROM '.$this->table. ' WHERE id_user=:user_id';
+            $this->db->query($this->stmt);
+            $this->db->bind('user_id',$user_id);
+            return $this->db->single();
+        }catch(Exception $e){
+            return $e->getMessage();    
+        }
+    }
 }

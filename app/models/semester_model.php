@@ -18,9 +18,8 @@ class Semester_model
     }
     public function addSemester($data)
     {
-        $this->stmt = 'INSERT INTO ' . $this->table . ' (years,semester_name) VALUES(:tahun,:semester)';
+        $this->stmt = 'INSERT INTO ' . $this->table . ' (semester) VALUES(:semester)';
         $this->db->query($this->stmt);
-        $this->db->bind('tahun', $data['tahun_ajaran']);
         $this->db->bind('semester', $data['semester']);
         $this->db->execute();
         return $this->db->rowCount();
@@ -44,8 +43,7 @@ class Semester_model
 
     public function updtSemester($data)
     {
-        $this->stmt = 'UPDATE ' . $this->table . ' SET years=:tahun,semester_name=:semester';
-        $this->db->query($this->stmt);
+        $this->stmt = 'UPDATE ' . $this->table . ' SET semester=:semester';
         $this->db->bind('tahun',$data['tahun_ajaran']);
         $this->db->bind('semester',$data['semester']);
         $this->db->execute();

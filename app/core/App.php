@@ -4,7 +4,7 @@
 class Router
 {
     // controller
-    protected $controller = 'Admin';
+    protected $controller = 'Dashboard';
     // method
     protected $method = 'index';
     protected $params = [];

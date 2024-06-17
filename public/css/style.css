@@ -124,3 +124,7 @@ a{
     gap: 0.6rem;
     align-items: center;
 }
+
+table{
+    color: #060606;
+}

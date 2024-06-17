@@ -100,14 +100,8 @@
                                             <td width='1'>:</td>
                                             <td>
                                                 <select class="form-control" name="role" id="role">
-                                                    <?php
-
-                                                    foreach ($data['users'] as $user) :
-                                                    ?>
-                                                        <option value="<?= $user['role'] ?>"><?= $user['role'] ?></option>
-                                                    <?php
-                                                    endforeach;
-                                                    ?>
+                                                    <option value="teacher">teacher</option>
+                                                    <option value="admin">admin</option>
                                                 </select>
                                             </td>
                                         </tr>

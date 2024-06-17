@@ -9,8 +9,7 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>tahun ajaran</th>
-                            <th>nama semester</th>
+                            <th>Semester</th>
                             <th>aksi</th>
                         </tr>
                     </thead>
@@ -21,8 +20,7 @@
                         ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $semester['years'] ?></td>
-                                <td><?= $semester['semester_name'] ?></td>
+                                <td><?= $semester['semester'] ?></td>
 
                                 <td width="50">
                                     <div class="action px-2 d-flex gap-2">
@@ -77,14 +75,9 @@
                                 <div class="card-body">
                                     <table class="table">
                                         <tr>
-                                            <td width='100'>tahun ajaran</td>
+                                            <td width='100'>Semester</td>
                                             <td width='1'>:</td>
-                                            <td><input type="text" class="form-control" name="tahun_ajaran" id="tahun_ajaran" value=""></td>
-                                        </tr>
-                                        <tr>
-                                            <td width='100'>semester</td>
-                                            <td width='1'>:</td>
-                                            <td><input type="text" class="form-control" name="semester" value="" id="semester"></td>
+                                            <td><input type="text" class="form-control" name="semester" id="semester" value=""></td>
                                         </tr>
 
                                     </table>

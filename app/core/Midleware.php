@@ -10,17 +10,14 @@ class Midleware{
     }
     public static function checkAdmin(){
         if (!isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
-            session_unset();
-            session_destroy();
-            header('Location:' . BASEURL . '/auth');
+
+            header('Location:' . BASEURL . '/dashboard');
             exit;
         }
     }
     public static function checkSiswa(){
-        if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin' && $_SESSION['role'] == 'teacher') {
-            session_unset();
-            session_destroy();
-            header('Location:' . BASEURL . '/auth');
+        if (isset($_SESSION['role'])) {
+            header('Location:' . BASEURL . '/dashboard');
             exit;
         }
     }

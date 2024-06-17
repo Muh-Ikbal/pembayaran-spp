@@ -16,9 +16,13 @@ class Auth extends Controller
         if (sizeof($siswaUser) > 0) {
             if (password_verify($password, $siswaUser['password'])) {
                 session_start();
-                $_SESSION['username'] = $siswaUser['name'];
+                $_SESSION['username'] = $siswaUser['username'];
+                $_SESSION['name'] = $siswaUser['name'];
+                $_SESSION['gambar'] = $siswaUser['gambar'];
+                $_SESSION['nis'] = $siswaUser['nis'];
+                $_SESSION['id_students'] = $siswaUser['id_students'];
                 Flasher::setFlasher('berhasil', 'user ', ' login', 'success', '');
-                header('Location:' . BASEURL . '/siswa/dashboard');
+                header('Location:' . BASEURL . '/dashboard');
             } else {
                 Flasher::setFlasher('salah', 'password ', ' gagal login', 'danger', '');
                 header('Location:' . BASEURL . '/auth');
@@ -26,10 +30,13 @@ class Auth extends Controller
         } else if (sizeof($adminUser) > 0) {
             if (password_verify($password, $adminUser['password'])) {
                 session_start();
-                $_SESSION['username'] = $adminUser['name'];
+                $_SESSION['username'] = $adminUser['username'];
+                $_SESSION['name'] = $adminUser['name'];
                 $_SESSION['role'] = $adminUser['role'];
+                $_SESSION['gambar'] = $adminUser['gambar'];
+                $_SESSION['id_user'] = $adminUser['id_user'];
                 Flasher::setFlasher('berhasil', 'user ', ' login', 'success', '');
-                header('Location:' . BASEURL . '/admin');
+                header('Location:' . BASEURL . '/dashboard');
             } else {
                 Flasher::setFlasher('salah', 'password ', ' gagal login', 'danger', '');
                 header('Location:' . BASEURL . '/auth');

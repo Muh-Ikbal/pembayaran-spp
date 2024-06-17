@@ -12,8 +12,8 @@ class Kelas_model
     }
     public function getAllClass()
     {
-        $this->stmt = 'SELECT * FROM ' . $this->table; 
-                    
+        $this->stmt = 'SELECT * FROM ' . $this->table;
+
         $this->db->query($this->stmt);
         return $this->db->result();
     }
@@ -28,10 +28,9 @@ class Kelas_model
     }
     public function addKelas($data)
     {
-        $this->stmt = 'INSERT INTO classes (class_name,teacher_id) VALUES(?,?)';
+        $this->stmt = 'INSERT INTO classes (class_name) VALUES(?)';
         $this->db->query($this->stmt);
         $this->db->bind(1, $data['nama_kelas']);
-        $this->db->bind(2, $data['id_guru']);
         $this->db->execute();
         return $this->db->rowCount();
     }
@@ -46,10 +45,14 @@ class Kelas_model
     }
     public function delKelas($id)
     {
-        $this->stmt = 'DELETE FROM classes WHERE id=:id';
-        $this->db->query($this->stmt);
-        $this->db->bind('id', $id);
-        $this->db->execute();
-        return $this->db->rowCount();
+        try {
+            $this->stmt = 'DELETE FROM classes WHERE id=:id';
+            $this->db->query($this->stmt);
+            $this->db->bind('id', $id);
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

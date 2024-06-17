@@ -5,7 +5,7 @@
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    <a class="text-muted" href="#" target="_blank"><strong>Aplikasi Pembayaran SPP</strong></a> &copy;
+                    <a class="text-muted" href="#" target="_blank"><strong>Aplikasi Pembayaran SPP</strong></a> &copy;kelompok 2 RPL
                 </p>
             </div>
             <div class="col-6 text-end">
@@ -33,6 +33,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?= BASEURL ?>/js/app.js"></script>
 <script src="<?= BASEURL ?>/js/index.js"></script>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-iKejUQjDIgbbFaIr"></script>
 <script src="<?= BASEURL ?>/js/script.js"></script>
 
 <script>

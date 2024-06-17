@@ -7,6 +7,11 @@
 // // Trigger change event on page load to set default value
 // document.getElementById("sppSelect").dispatchEvent(new Event("change"));
 
+// function cekPembayaran($id) {
+//     window.location.href =
+//         "http://localhost/pembayaran-spp/public/siswa/cekStatus/" + $id;
+// }
+
 document.addEventListener("DOMContentLoaded", () => {
     // dapatka url
     let currentPage = window.location.pathname.split("/").pop();

@@ -114,7 +114,6 @@ $(function () {
     $(".modalAddSemester").on("click", function () {
         $("#forModalSemester").html("Tambah Data Semester");
         $(".modal-footer button[type=submit]").html("Save Data");
-        $("#tahun_ajaran").val("");
         $("#semester").val("");
         $(".semester-modal form").attr(
             "action",
@@ -136,10 +135,9 @@ $(function () {
             method: "post",
             dataType: "json",
             success: function (data) {
-                console.log(data);
+                console.log(data.semester);
                 $("#id_semester").val(data.id_semester);
-                $("#tahun_ajaran").val(data.years);
-                $("#semester").val(data.semester_name);
+                $("#semester").val(data.semester);
             },
         });
     });
@@ -157,7 +155,6 @@ $(function () {
     });
 
     $(".modalUpdtGuru").on("click", function () {
-        
         const id = $(this).data("id");
         $.ajax({
             url: "http://localhost/pembayaran-spp/public/admin/getUpdtGuru",
@@ -173,4 +170,152 @@ $(function () {
             },
         });
     });
+        $("#tombolPay").on("click", function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "http://localhost/pembayaran-spp/public/siswa/paySpp",
+                data: {
+                    student_id: $("#student_id").val(),
+                    nama: $("#name").val(),
+                    id_class: $("#id_class").val(),
+                    id_teacher: $("#id_teacher").val(),
+                    semester: $("#semester").val(),
+                    spp: $("#jumlahBayar").val(),
+                },
+                dataType: "json",
+                success: function (res) {
+                    if (res.status === "error") {
+                        alert("Error: " + res.message);
+                    } else if (res.snapToken) {
+                        snap.pay(res.snapToken, {
+                            onSuccess: function (result) {
+                                let dataResult = JSON.stringify(result, null, 2);
+                                let dataObj = JSON.parse(dataResult);
+                                console.log(dataObj)
+                                $.ajax({
+                                    type: "POST",
+                                    url: "http://localhost/pembayaran-spp/public/siswa/addPembayaran",
+                                    data: {
+                                        student_id: res.student_id,
+                                        nama: res.name,
+                                        id_class: res.id_class,
+                                        id_teacher: res.id_teacher,
+                                        semester: res.semester,
+                                        spp: res.spp,
+                                        amount_paid: dataObj.gross_amount,
+                                        payment_date: dataObj.transaction_time,
+                                        transaction_status:
+                                            dataObj.transaction_status,
+                                        payment_type: dataObj.payment_type,
+                                        va_number: dataObj.va_numbers[0].va_number,
+                                        bank: dataObj.va_numbers[0].bank,
+                                        order_id: dataObj.order_id,
+                                    },
+                                    dataType: "json",
+                                    success: function (response) {
+                                        if (response.status === "success") {
+                                            alert(response.message);
+                                            window.location.reload();
+                                        } else {
+                                            alert(response.message);
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert("Terjadi kesalahan: " + error);
+                                    },
+                                });
+
+                                console.log(JSON.stringify(result, null, 2));
+                            },
+                            onPending: function (result) {
+                                let dataResult = JSON.stringify(result, null, 2);
+                                let dataObj = JSON.parse(dataResult);
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "http://localhost/pembayaran-spp/public/siswa/addPembayaran",
+                                    data: {
+                                        student_id: res.student_id,
+                                        nama: res.name,
+                                        id_class: res.id_class,
+                                        id_teacher: res.id_teacher,
+                                        semester: res.semester,
+                                        spp: res.spp,
+                                        amount_paid: dataObj.gross_amount,
+                                        payment_date: dataObj.transaction_time,
+                                        transaction_status:
+                                            dataObj.transaction_status,
+                                        payment_type: dataObj.payment_type,
+                                        va_number: dataObj.va_numbers[0].va_number,
+                                        bank: dataObj.va_numbers[0].bank,
+                                        order_id: dataObj.order_id,
+                                    },
+                                    dataType: "json",
+                                    success: function (response) {
+                                        if (response.status === "success") {
+                                            alert(response.message);
+                                            window.location.reload();
+                                        } else {
+                                            alert(response.message);
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert("Terjadi kesalahan: " + error);
+                                    },
+                                });
+                                console.log(JSON.stringify(result, null, 2));
+                            },
+                            onError: function (result) {
+                                let dataResult = JSON.stringify(result, null, 2);
+                                let dataObj = JSON.parse(dataResult);
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "http://localhost/pembayaran-spp/public/siswa/addPembayaran",
+                                    data: {
+                                        student_id: res.student_id,
+                                        nama: res.name,
+                                        id_class: res.id_class,
+                                        id_teacher: res.id_teacher,
+                                        semester: res.semester,
+                                        spp: res.spp,
+                                        amount_paid: dataObj.gross_amount,
+                                        payment_date: dataObj.transaction_time,
+                                        transaction_status:
+                                            dataObj.transaction_status,
+                                        payment_type: dataObj.payment_type,
+                                        va_number: dataObj.va_numbers[0].va_number,
+                                        bank: dataObj.va_numbers[0].bank,
+                                        order_id: dataObj.order_id,
+                                    },
+                                    dataType: "json",
+                                    success: function (response) {
+                                        if (response.status === "success") {
+                                            alert(response.message);
+                                            window.location.reload();
+                                        } else {
+                                            alert(response.message);
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert("Terjadi kesalahan: " + error);
+                                    },
+                                });
+                                console.log(JSON.stringify(result, null, 2));
+                            },
+                        });
+                    } else {
+                        alert("Snap Token tidak ditemukan.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("AJAX request failed: " + error);
+                },
+            });
+        });
+
+    function sendDataToServer(result) {
+        // Function to send transaction result to your server for further processing
+    }
 });

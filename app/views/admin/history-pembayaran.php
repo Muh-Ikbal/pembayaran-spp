@@ -16,7 +16,6 @@
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
                             <th>Semester</th>
-                            <th>Tahun Ajaran</th>
                             <th>Jumlah SPP</th>
                             <th>Jumlah Bayar</th>
                             <th>Status</th>
@@ -33,8 +32,7 @@
                             <td><?=$res['student_id']?></td>
                             <td><?=$res['name']?></td>
                             <td><?=$res['class_name']?></td>
-                            <td><?=$res['semester_name']?></td>
-                            <td><?=$res['years']?></td>
+                            <td><?=$res['semester']?></td>
                             <td><?=$res['SPP']?></td>
                             <td><?=$res['amount_paid']?></td>
                             <?php 
