@@ -9,11 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
-        *{
-            box-sizing: border-box !important;
-        }
         body {
             font-family: 'poppins', sans-serif;
+        }
+
+        thead tr {
+            border-bottom: 2px solid black;
         }
 
         span {
@@ -21,20 +22,28 @@
         }
 
         @media screen and (max-width: 600px) {
-            h3{
+            h3 {
                 font-size: 1rem !important;
             }
-            span{
+
+            span {
                 font-size: 1rem !important;
             }
-            .confirm strong{
+
+            .confirm strong {
                 font-size: 1rem !important;
             }
-            td{
+
+            td {
                 font-size: 0.8rem;
             }
-            .main-content{
+
+            .main-content {
                 overflow: auto;
+            }
+
+            .quote {
+                font-size: 1rem !important;
             }
         }
     </style>
@@ -42,52 +51,41 @@
 </head>
 
 <body>
-    <div class=" my-3 container" id="invoice">
+    <div class="container my-3" id="invoice">
         <!-- header content -->
         <header>
-            <div class="nav d-flex justify-content-between align-items-center">
+            <div class="nav">
                 <div class="logo ">
                     <h3 class="fw-bold">Pembayaran <br>SPP</h3>
                 </div>
-                <div class="confirm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#699BF7" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <strong>LUNAS</strong>
-                </div>
             </div>
             <hr class="bg-black" style="height: 2px; border: none; background-color: black;">
-            <div class="information d-flex justify-content-between align-items-center">
-                <div class="billTo">
-
-                    <h3 class="fw-bold">Bill To</h3>
-                    <Span class="fw-bold"><?= $data['pembayaran']['name'] ?></Span> <br>
-                    <Span class="" style="font-size: 1rem !important;"><?= $data['pembayaran']['nis'] ?></Span>
-                </div>
-                <div class="payTo text-end">
-                    <h3 class="fw-bold">Pay To</h3>
-                    <Span class="fw-bold">SMAN 2 KENDARI</Span> <br>
-                    <Span class="text-sm" style="font-size: 1rem !important;">@pembayaranSPP</Span>
-                </div>
-            </div>
-            <hr class="bg-black" style="height: 2px; border: none; background-color: black;">
-            <div class="desc-bill mt-5">
+            <?php
+            // var_dump($data['pembayaran']);
+            // var_dump($data['teacher']);
+            ?>
+            <div class="desc-bill mt-1">
                 <table class="fw-bold" style="font-size: 1.1em;">
                     <tr>
-                        <td width="300">Va Number </td>
+                        <td width="200">Guru </td>
                         <td>:</td>
-                        <td><?= $data['pembayaran']['va_number'] ?></td>
+                        <td><?= $data['teacher']['name'] ?></td>
                     </tr>
                     <tr>
-                        <td>Waktu Pembayaran </td>
+                        <td>Nip </td>
                         <td>:</td>
-                        <td><?= $data['pembayaran']['payment_date'] ?></td>
+                        <td><?= $data['nip']['nip'] ?></td>
+                    </tr>
+                    <tr>
+                        <td>Kelas </td>
+                        <td>:</td>
+                        <td><?= $data['pembayaran'][0]['class_name'] ?></td>
                     </tr>
                 </table>
             </div>
         </header>
         <!-- main content -->
-        <main class="main-content my-5">
+        <main class="my-3 main-content">
             <table class="table table-bordered">
                 <thead style="border-bottom: 2px;" class="text-center">
                     <tr class="p-0" style="font-size: 0.9rem;">
@@ -101,15 +99,25 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider" style="font-size: 0.8rem;">
-                    <tr height="200">
-                        <th scope="row"></th>
-                        <td><?= $data['pembayaran']['name'] ?></td>
-                        <td><?= $data['pembayaran']['nis'] ?></td>
-                        <td><?= $data['pembayaran']['class_name'] ?></td>
-                        <td><?= $data['pembayaran']['semester'] ?></td>
-                        <td><?= $data['pembayaran']['SPP'] ?></td>
-                        <td><?= $data['pembayaran']['amount_paid'] ?></td>
-                    </tr>
+                    <?php
+                    $no = 1;
+                    foreach ($data['pembayaran'] as $bill) :
+                        if ($bill['transaction_status'] == 'settlement') :
+                    ?>
+                            <tr>
+                                <th scope="row"><?= $no++ ?></th>
+                                <td><?= $bill['name'] ?></td>
+                                <td><?= $bill['student_id'] ?></td>
+                                <td><?= $bill['class_name'] ?></td>
+                                <td><?= $bill['semester'] ?></td>
+                                <td><?= $bill['SPP'] ?></td>
+                                <td><?= $bill['amount_paid'] ?></td>
+
+                            </tr>
+                    <?php
+                        endif;
+                    endforeach;
+                    ?>
                 </tbody>
             </table>
         </main>
@@ -127,7 +135,8 @@
             </div>
         </footer>
     </div>
-    <div class="container">
+    <div class="container d-flex justify-content-between">
+        <div class="hidden"></div>
         <div class="action my-5">
             <button class="btn btn-primary"> kembali </button>
             <button class="btn btn-success" onclick="unduh()"> unduh</button>
@@ -142,7 +151,7 @@
             // Konfigurasi opsi untuk html2pdf
             const options = {
                 margin: 1,
-                filename: 'invoice.pdf',
+                filename: 'laporan pembayaran.pdf',
                 image: {
                     type: 'jpeg',
                     quality: 0.98
@@ -164,4 +173,4 @@
 
 </body>
 
-</html>
+</html>s

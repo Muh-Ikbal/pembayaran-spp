@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Data Users</h5>
+                <h5 class="card-title mb-0">Data Semester</h5>
             </div>
             <div class="card-body">
                 <table class="table ">

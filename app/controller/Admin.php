@@ -6,6 +6,10 @@ class Admin extends Controller
         Midleware::checkLogin();
         Midleware::checkAdmin();
     }
+    public function index()
+    {
+        header('Location:' . BASEURL . '/dashboard');
+    }
     public function kelas()
     {
         $data['kelas'] = $this->model('kelas_model')->getAllClass();
@@ -226,12 +230,13 @@ class Admin extends Controller
     }
     
     public function updtSemester(){
-        if ($this->model('semester_model')->updtSemester($_POST) > 0) {
+        $result = $this->model('semester_model')->updtSemester($_POST);
+        if (is_numeric($result) && $result > 0) {
             Flasher::setFlasher('berhasil', 'data ', ' diubah', 'success', 'semester');
             header('Location:' . BASEURL . '/admin/semesters');
             exit;
         } else {
-            Flasher::setFlasher('gagal', 'data ', ' diubah', 'danger', 'semester');
+            Flasher::setFlasher('gagal', 'data ', ' diubah : '.$result, 'danger', 'semester');
             header('Location:' . BASEURL . '/admin/semesters');
         }
     }

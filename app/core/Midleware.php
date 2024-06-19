@@ -15,6 +15,13 @@ class Midleware{
             exit;
         }
     }
+    public static function checkGuru(){
+        if (!isset($_SESSION['role']) && $_SESSION['role'] !== 'teacher') {
+
+            header('Location:' . BASEURL . '/dashboard');
+            exit;
+        }
+    }
     public static function checkSiswa(){
         if (isset($_SESSION['role'])) {
             header('Location:' . BASEURL . '/dashboard');

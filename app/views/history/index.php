@@ -12,7 +12,7 @@
                             <?php
                             if (isset($_SESSION['role']) && $_SESSION['role']=='teacher') :
                             ?>
-                                <a class="btn btn-success mb-2" target="_blank" href="laporan.php">Generate Laporan</a>
+                                <a class="btn btn-success mb-2" href="<?=BASEURL?>/guru/laporan/<?=$data['guru']['id_teacher']?>">Generate Laporan</a>
                             <?php endif ?>
                         </div>
                         <?php if (isset($_SESSION['role'])) : ?>

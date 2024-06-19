@@ -7,6 +7,10 @@ class Siswa extends Controller
         Midleware::checkLogin();
         Midleware::checkSiswa();
     }
+
+    public function index(){
+        header('Location:'.BASEURL.'/dashboard');
+    }
     public function pembayaran()
     {
         $user = $_SESSION['username'];

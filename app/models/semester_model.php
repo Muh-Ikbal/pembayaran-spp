@@ -12,7 +12,7 @@ class Semester_model
     }
     public function getAllSemester()
     {
-        $this->stmt = 'SELECT * FROM ' . $this->table;
+        $this->stmt = 'SELECT * FROM ' . $this->table . ' ORDER BY id_semester';
         $this->db->query($this->stmt);
         return $this->db->result();
     }
@@ -43,10 +43,15 @@ class Semester_model
 
     public function updtSemester($data)
     {
-        $this->stmt = 'UPDATE ' . $this->table . ' SET semester=:semester';
-        $this->db->bind('tahun',$data['tahun_ajaran']);
-        $this->db->bind('semester',$data['semester']);
-        $this->db->execute();
-        return $this->db->rowCount();
+        try {
+            $this->stmt = 'UPDATE ' . $this->table . ' SET semester=:semester WHERE id_semester=:id';
+            $this->db->query($this->stmt);
+            $this->db->bind('semester', $data['semester']);
+            $this->db->bind('id', $data['id_semester']);
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

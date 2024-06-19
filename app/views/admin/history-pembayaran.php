@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Daftar Siswa</h5>
+                <h5 class="card-title mb-0">History Pembayaran</h5>
             </div>
             <div class="card-body">
                 <a class="btn btn-success mb-2" target="_blank" href="laporan.php">Generate Laporan</a>
