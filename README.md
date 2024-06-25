@@ -8,7 +8,7 @@ terus simpan di htdocs xampp
 username : admin1
 password : ikbal2004
 # siswa 
-username : fikry
+username : fikry@siswa
 password : e1e122110
 # guru
 username : afdal@guru
