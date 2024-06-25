@@ -11,7 +11,7 @@ password : ikbal2004
 username : fikry
 password : e1e122110
 # guru
-username : adal@guru
+username : afdal@guru
 password : e1e122065
 # orang tua
 username : asma@parents
