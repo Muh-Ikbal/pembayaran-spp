@@ -31,7 +31,7 @@ class Auth extends Controller
             if (password_verify($password, $adminUser['password'])) {
                 session_start();
                 $_SESSION['username'] = $adminUser['username'];
-                $_SESSION['name'] = $adminUser['name'];
+                $_SESSION['name'] = $adminUser['full_name'];
                 $_SESSION['role'] = $adminUser['role'];
                 $_SESSION['gambar'] = $adminUser['gambar'];
                 $_SESSION['id_user'] = $adminUser['id_user'];

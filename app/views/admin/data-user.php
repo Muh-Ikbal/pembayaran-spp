@@ -25,7 +25,7 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $user['username'] ?></td>
                                 <td><?= $user['password'] ?></td>
-                                <td><?= $user['name'] ?></td>
+                                <td><?= $user['full_name'] ?></td>
                                 <td><?= $user['role'] ?></td>
 
                                 <td width="50">
@@ -102,6 +102,7 @@
                                                 <select class="form-control" name="role" id="role">
                                                     <option value="teacher">teacher</option>
                                                     <option value="admin">admin</option>
+                                                    <option value="parents">parents</option>
                                                 </select>
                                             </td>
                                         </tr>

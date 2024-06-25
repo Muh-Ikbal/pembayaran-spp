@@ -89,7 +89,7 @@ class Pembayaran_model
             $where = ' AND (nis LIKE :keyword OR name LIKE :keyword)'; // Tambahkan spasi setelah WHERE
             $bind_values[':keyword'] = '%' . $keyword . '%'; // Menyimpan nilai parameter
         }
-        $this->stmt = 'SELECT bills.*, students.*, semesters.*, classes.* FROM ' . $this->table . ' JOIN students on bills.student_id=students.nis JOIN semesters on bills.semester_id = semesters.id_semester JOIN classes on students.class_id = classes.id WHERE teacher_id = :id ' . $where . ' ORDER BY student_id';
+        $this->stmt = 'SELECT bills.*, students.*, semesters.*, classes.* FROM ' . $this->table . ' JOIN students on bills.student_id=students.nis JOIN semesters on bills.semester_id = semesters.id_semester JOIN classes on students.class_id = classes.id WHERE teacher_id = :id ' . $where . ' ORDER BY semester_id';
         $this->db->query($this->stmt);
         $this->db->bind(':id', $id); // Pastikan untuk menggunakan bind dengan parameter ':id'
         foreach ($bind_values as $key => $value) {
@@ -119,23 +119,37 @@ class Pembayaran_model
         try {
             $this->stmt = 'SELECT * FROM ' . $this->table . ' WHERE id_pembayaran=:id';
             $this->db->query($this->stmt);
-            $this->db->bind('id',$id_pembayaran);
+            $this->db->bind('id', $id_pembayaran);
             return $this->db->single();
         } catch (Exception $e) {
             return $e->getMessage();
         }
         // return false;
     }
-    public function updateStatus($id_pembayaran,$status){
-        try{
-        $this->stmt = 'UPDATE '.$this->table . ' SET  transaction_status = :status WHERE id_pembayaran =:id';
-        $this->db->query($this->stmt);
-        $this->db->bind('status',$status);
-        $this->db->bind('id',$id_pembayaran);
-        $this->db->execute();
-        return $this->db->rowCount();
-    }catch(Exception $e){
-        return $e->getMessage();
+    public function updateStatus($id_pembayaran, $status)
+    {
+        try {
+            $this->stmt = 'UPDATE ' . $this->table . ' SET  transaction_status = :status WHERE id_pembayaran =:id';
+            $this->db->query($this->stmt);
+            $this->db->bind('status', $status);
+            $this->db->bind('id', $id_pembayaran);
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
+    public function hapusPembayaran($id)
+    {
+        try {
+            $this->stmt = 'DELETE FROM ' . $this->table . ' WHERE id_pembayaran =:id';
+            $this->db->query($this->stmt);
+            $this->db->bind('id', $id);
+            $this->db->result();
+            return $this->db->rowCount();
+            // return 'berhasil';
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

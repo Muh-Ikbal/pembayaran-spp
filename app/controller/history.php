@@ -11,9 +11,14 @@ class History extends Controller{
         if(isset($_SESSION['role'])){
             if($_SESSION['role']=='admin'){
                 $data['pembayaran'] = $this->model('pembayaran_model')->getAllBills();
-            }else{
+            }elseif($_SESSION['role'] == 'teacher'){
                 $data['guru'] = $this->model('guru_model')->getGuruByUserId($_SESSION['id_user']);
                 $data['pembayaran'] = $this->model('pembayaran_model')->getAllBillsByIdTeacher($data['guru']['id_teacher']);
+            }else{
+                $data['parents'] = $this->model('parents_model')->getParentsByUserId($_SESSION['id_user']);
+                $data['siswa'] = $this->model('siswa_model')->getSiswa($data['parents']['id_student']);
+                $data['pembayaran'] = $this->model('pembayaran_model')->getAllBillsByNis($data['siswa']['nis']);
+
             }
         }else{
             $data['pembayaran'] = $this->model('pembayaran_model')->getAllBillsByNis($_SESSION['nis']);
@@ -37,6 +42,19 @@ class History extends Controller{
         } else {
             Flasher::setFlasher('sudah', 'status ', ' paling update', 'warning', 'pembayaran');
             header('Location:' . BASEURL . '/history');
+        }
+    }
+
+    public function hapus($id){
+        $result = $this->model('pembayaran_model')->hapusPembayaran($id);
+        if(is_numeric($result) && $result > 0){
+            Flasher::setFlasher('berhasil','data ','dihapus', 'success','pembayaran') ;
+            header('Location:'.BASEURL.'/history');
+            exit;
+        }else{
+            Flasher::setFlasher('gagal', 'data ', 'dihapus:'.$result, 'success', 'pembayaran');
+            header('Location:' . BASEURL . '/history');
+            exit;
         }
     }
     

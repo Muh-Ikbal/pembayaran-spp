@@ -10,6 +10,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Semester</th>
+                            <th>Tenggat Waktu</th>
                             <th>aksi</th>
                         </tr>
                     </thead>
@@ -21,6 +22,7 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $semester['semester'] ?></td>
+                                <td><?= $semester['tenggat_waktu'] ?></td>
 
                                 <td width="50">
                                     <div class="action px-2 d-flex gap-2">
@@ -78,6 +80,13 @@
                                             <td width='100'>Semester</td>
                                             <td width='1'>:</td>
                                             <td><input type="text" class="form-control" name="semester" id="semester" value=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='100'>Tenggat Waktu</td>
+                                            <td width='1'>:</td>
+                                            <td>
+                                                <input type="date" class="form-control" name="due_date" id="due_date">
+                                            </td>
                                         </tr>
 
                                     </table>

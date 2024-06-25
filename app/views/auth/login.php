@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: #CDB8A5 !important;">
     <main class="d-flex w-100">
         <div class="container d-flex flex-column">
             <div class="row vh-100">
@@ -40,11 +40,21 @@
                                     <form action="<?= BASEURL ?>/auth/authLogin" method="post">
                                         <div class="mb-3">
                                             <label class="form-label">Username</label>
-                                            <input class="form-control form-control-lg" type="text" name="username" placeholder="Masukkan Username/Nisn" />
+                                            <input class="form-control form-control-lg" autocomplete="off" type="text" name="username" placeholder="Masukkan Username" />
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Password</label>
-                                            <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
+                                            <label class="form-label d-flex justify-content-between">
+                                                <div>password</div>
+                                                <div id="hide">
+                                                    <svg id="toogleEye" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                                                    </svg>
+                                                    <span>show</span>
+                                                </div>
+
+                                            </label>
+                                            <input class="form-control form-control-lg" type="password" autocomplete="off" name="password" id="password" placeholder="Enter your password" />
                                         </div>
                                         <div>
                                             <div class="form-check align-items-center">
@@ -66,6 +76,7 @@
     </main>
 
     <script src="<?= BASEURL ?>/js/app.js"></script>
+    <script src="<?= BASEURL ?>/js/login.js"></script>
 
 </body>
 

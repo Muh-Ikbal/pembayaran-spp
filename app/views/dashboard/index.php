@@ -7,8 +7,8 @@
                 <div class="profile d-flex justify-content-center">
                     <?php
                     $gambar = 'profile.jpg';
-                    if ($data['gambar'] != '') {
-                        $gambar = $data['gambar'];
+                    if ($data['user']['gambar'] != '') {
+                        $gambar = $data['user']['gambar'];
                     }
                     ?>
                     <img src="<?= BASEURL ?>/img/avatars/<?= $gambar ?>" alt="profile" class="rounded-circle shadow-lg" width="100">
@@ -34,9 +34,41 @@
                                 <td><?= $_SESSION['nis'] ?></td>
                             </tr>
                             <tr>
+                                <td width='200'>kelas</td>
+                                <td width='1'>:</td>
+                                <td><?= $data['kelas']['class_name'] ?></td>
+                            </tr>
+                            <tr>
                                 <td width='200'>Status</td>
                                 <td width='1'>:</td>
                                 <td>Siswa</td>
+                            </tr>
+                        <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == 'teacher') : ?>
+                            <tr>
+                                <td width='200'>Nip</td>
+                                <td width='1'>:</td>
+                                <td><?= ($data['guru']['nip']) ?></td>
+                            </tr>
+                            <tr>
+                                <td width='200'>Kelas</td>
+                                <td width='1'>:</td>
+                                <td><?= ($data['kelas']['class_name']) ?></td>
+                            </tr>
+                            <tr>
+                                <td width='200'>Status</td>
+                                <td width='1'>:</td>
+                                <td><?= $_SESSION['role'] ?></td>
+                            </tr>
+                        <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == 'parents') : ?>
+                            <tr>
+                                <td width='200'>Nama Anak</td>
+                                <td width='1'>:</td>
+                                <td><?= ($data['siswa']['name']) ?></td>
+                            </tr>
+                            <tr>
+                                <td width='200'>Status</td>
+                                <td width='1'>:</td>
+                                <td><?= $_SESSION['role'] ?>(orang tua)</td>
                             </tr>
                         <?php else : ?>
                             <tr>

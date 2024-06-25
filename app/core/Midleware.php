@@ -9,15 +9,21 @@ class Midleware{
         }
     }
     public static function checkAdmin(){
-        if (!isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
             header('Location:' . BASEURL . '/dashboard');
             exit;
         }
     }
     public static function checkGuru(){
-        if (!isset($_SESSION['role']) && $_SESSION['role'] !== 'teacher') {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'teacher') {
 
+            header('Location:' . BASEURL . '/dashboard');
+            exit;
+        }
+    }
+    public static function checkParents(){
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'parents') {
             header('Location:' . BASEURL . '/dashboard');
             exit;
         }

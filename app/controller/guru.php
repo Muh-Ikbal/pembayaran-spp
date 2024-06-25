@@ -13,6 +13,7 @@ class Guru extends Controller{
         $data['pembayaran'] = $this->model('pembayaran_model')->getAllBillsByIdTeacher($id);
         $data['teacher'] = $this->model('user_model')->getUser($_SESSION['id_user']);
         $data['nip'] = $this->model('guru_model')->getGuruByUserId($_SESSION['id_user']);
+        $data['kelas'] = $this->model('kelas_model')->getKelas($data['nip']['class_id']);
         $this->view('laporan/index', $data);
     }
 }

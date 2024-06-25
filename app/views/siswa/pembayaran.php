@@ -28,7 +28,7 @@
                             <td width='1'>:</td>
                             <td>
                                 <select class="form-control" name="id_teacher" id="id_teacher">
-                                    <option value="<?= $data['guru']['id_teacher'] ?>" selected><?= $data['guru']['name'] ?></option>
+                                    <option value="<?= $data['guru']['id_teacher'] ?>" selected><?= $data['guru']['full_name'] ?></option>
                                 </select>
                             </td>
                         </tr>
@@ -59,28 +59,6 @@
                         </tr>
                     </table>
                 </form>
-                <div class="p-3">
-                    <h4>Pembayaran Yang Belum Diselesaikan</h4>
-                    <ul class="list-group">
-                        <?php
-                        $adaPembayaran = false;
-                        foreach ($data['pembayaran'] as $bill) :
-                            if ($bill["amount_paid"] == 0 && $bill["amount_paid"] < $bill["SPP"]) :
-                                $adaPembayaran = true;
-                        ?>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <?= $bill["semester"] ?>
-                                    <button type="button" class="btn btn-primary" style="text-decoration: none;" id="tombolBayar">Bayar</button>
-                                </li>
-                            <?php endif;
-                        endforeach;
-                        if (!$adaPembayaran) : ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                Tidak ada pembayaran
-                            </li>
-                        <?php endif ?>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

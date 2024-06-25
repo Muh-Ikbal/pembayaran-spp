@@ -23,13 +23,13 @@ class User_model
     }
     public function getAllUser()
     {
-        $this->stmt = 'SELECT * FROM ' . $this->table;
+        $this->stmt = 'SELECT * FROM ' . $this->table . ' ORDER BY role';
         $this->db->query($this->stmt);
         return $this->db->result();
     }
     public function addUser($data)
     {
-        $this->stmt = 'INSERT INTO ' . $this->table . ' (username,password,name,role) VALUES(:user,:pass,:name,:role)';
+        $this->stmt = 'INSERT INTO ' . $this->table . ' (username,password,full_name,role) VALUES(:user,:pass,:name,:role)';
         $this->db->query($this->stmt);
         $this->db->bind('user', $data['username']);
         $this->db->bind('pass', password_hash($data['password'], PASSWORD_BCRYPT));
@@ -58,7 +58,7 @@ class User_model
 
     public function updtUser($data)
     {
-        $this->stmt = 'UPDATE ' . $this->table . ' SET username = :user,password=:pass,name=:name,role=:role WHERE id_user=:id';
+        $this->stmt = 'UPDATE ' . $this->table . ' SET username = :user,password=:pass,full_name=:name,role=:role WHERE id_user=:id';
         $this->db->query($this->stmt);
         $this->db->bind('user', $data['username']);
         $this->db->bind('name', $data['name']);

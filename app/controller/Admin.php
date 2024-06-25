@@ -18,6 +18,16 @@ class Admin extends Controller
         $this->view('admin/data-kelas', $data);
         $this->view('templates-admin/footer');
     }
+    public function parent()
+    {
+        $data['parent'] = $this->model('parents_model')->getAllParents();
+        $data['users'] = $this->model('user_model')->getAllUser();
+        $data['siswa'] = $this->model('siswa_model')->getAllSiswa();
+
+        $this->view('templates-admin/header');
+        $this->view('admin/data-parents', $data);
+        $this->view('templates-admin/footer');
+    }
     public function siswa()
     {
         $data['siswa'] = $this->model('siswa_model')->getAllSiswa();
@@ -51,6 +61,13 @@ class Admin extends Controller
         $this->view('admin/data-guru', $data);
         $this->view('templates-admin/footer');
     }
+    // public function parent()
+    // {
+    //     $data['parent'] = $this->model('parents_model')->getAllParents();
+    //     $this->view('templates-admin/header');
+    //     $this->view('admin/data-parents', $data);
+    //     $this->view('templates-admin/footer');
+    // }
     // function get data for ajax
     public function getData($model, $method)
     {
@@ -115,6 +132,18 @@ class Admin extends Controller
             header('Location:' . BASEURL . '/admin/guru');
         }
     }
+    public function addParents()
+    {
+        $result = $this->model('parents_model')->addParents($_POST);
+        if (is_numeric($result) && $result > 0) {
+            Flasher::setFlasher('berhasil', 'data ', ' ditambahkan', 'success', 'Orang Tua');
+            header('Location:' . BASEURL . '/admin/parent');
+            exit;
+        } else {
+            Flasher::setFlasher('gagal', 'data ', ' ditambahkan:'.$result, 'danger', 'Orang Tua');
+            header('Location:' . BASEURL . '/admin/parent');
+        }
+    }
 
     // Delete Items
     public function delSiswa($id)
@@ -153,12 +182,13 @@ class Admin extends Controller
     }
     public function delSemester($id)
     {
-        if ($this->model('semester_model')->delSemester($id) > 0) {
+        $result = $this->model('semester_model')->delSemester($id) ;
+        if (is_numeric($result) && $result> 0) {
             Flasher::setFlasher('berhasil', 'data ', ' dihapus', 'success', 'semester');
             header('Location:' . BASEURL . '/admin/semesters');
             exit;
         } else {
-            Flasher::setFlasher('gagal', 'data ', ' dihapus', 'danger', 'semester');
+            Flasher::setFlasher('gagal', 'data ', ' dihapus : '.$result, 'danger', 'semester');
             header('Location:' . BASEURL . '/admin/semesters');
         }
     }
@@ -171,6 +201,18 @@ class Admin extends Controller
         } else {
             Flasher::setFlasher('gagal', 'data ', ' dihapus', 'danger', 'guru');
             header('Location:' . BASEURL . '/admin/guru');
+        }
+    }
+    public function delParents($id)
+    {
+        $result= $this->model('parents_model')->delParents($id);
+        if (is_numeric($result) && $result > 0) {
+            Flasher::setFlasher('berhasil', 'data ', ' dihapus', 'success', 'orang tua');
+            header('Location:' . BASEURL . '/admin/parent');
+            exit;
+        } else {
+            Flasher::setFlasher('gagal', 'data ', ' dihapus', 'danger', 'orang tua');
+            header('Location:' . BASEURL . '/admin/parent');
         }
     }
 
@@ -228,6 +270,23 @@ class Admin extends Controller
     {
         $this->getData('semester_model', 'getSemester');
     }
+    public function getUpdtParent()
+    {
+        $this->getData('parents_model', 'getParent');
+    }
+    public function updtParents()
+    {
+        // var_dump($_POST);
+        $result = $this->model('parents_model')->updtParents($_POST);
+        if (is_numeric($result) && $result > 0) {
+            Flasher::setFlasher('berhasil', 'data ', ' diubah', 'success', 'orang tua');
+            header('Location:' . BASEURL . '/admin/parent');
+            exit;
+        } else {
+            Flasher::setFlasher('gagal', 'data ', ' diubah : ' . $result, 'danger', 'orang tua');
+            header('Location:' . BASEURL . '/admin/parent');
+        }
+    }
     
     public function updtSemester(){
         $result = $this->model('semester_model')->updtSemester($_POST);
@@ -256,4 +315,5 @@ class Admin extends Controller
             header('Location:' . BASEURL . '/admin/guru');
         }
     }
+    
 }

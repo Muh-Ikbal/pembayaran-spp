@@ -17,18 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = window.location.pathname.split("/").pop();
 
     const sideBar = document.querySelectorAll(".sidebar-item");
-    sideBar.forEach((elem)=>{
-        elem.classList.remove('active')
+    sideBar.forEach((elem) => {
+        elem.classList.remove("active");
         let page = elem.getAttribute("data-page");
         if (currentPage == page || (currentPage == "" && page == "dashboard")) {
             elem.classList.add("active");
         }
-    })
-        
-    
+    });
 });
-
-
-
-
-

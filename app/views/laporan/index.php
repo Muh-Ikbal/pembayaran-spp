@@ -79,7 +79,7 @@
                     <tr>
                         <td>Kelas </td>
                         <td>:</td>
-                        <td><?= $data['pembayaran'][0]['class_name'] ?></td>
+                        <td><?=$data['kelas']['class_name'] ?></td>
                     </tr>
                 </table>
             </div>
@@ -138,7 +138,7 @@
     <div class="container d-flex justify-content-between">
         <div class="hidden"></div>
         <div class="action my-5">
-            <button class="btn btn-primary"> kembali </button>
+            <a href="<?=BASEURL?>/history" class="btn btn-primary"> kembali </a>
             <button class="btn btn-success" onclick="unduh()"> unduh</button>
         </div>
     </div>
