@@ -25,21 +25,36 @@
         <div class="content">
             <div class="profile border bg-white p-3 card">
                 <h4>Avatar</h4>
-                <div class="d-flex justify-content-between">
-                    <img src="<?= BASEURL ?>/img/avatars/<?= $data['user']['gambar'] ?>" width="80" alt="">
-                    <div class="d-flex gap-3">
-                        <?php
-                        $id = 'id_user';
-                        if (!isset($_SESSION['role'])) {
-                            $id = 'id_student';
-                        }
-                        ?>
-                        <a class="color-primary modalUpdtAvatar" data-id="<?= $data['user']["$id"] ?>" data-bs-toggle="modal" data-bs-target="#updtProfile" style="text-decoration:none; cursor:pointer;">update avatar</a>
+                <div class="d-flex align-items-center gap-4 p-4">
+                    <div class="img">
+                        <img src="<?= BASEURL ?>/img/avatars/<?= $data['user']['gambar'] ?>" width="150" alt="">
+                    </div>
+                    <div class="d-flex">
+                        <form action="<?= BASEURL ?>/setting/updtAvatar" method="post" enctype="multipart/form-data">
+                            <?php
+                            if (isset($data['user']['role'])) {
+                                $id = $data['user']['id_user'];
+                            } else {
+                                $id = $data['user']['id_student'];
+                            }
+                            ?>
+                            <input type="hidden" name="id_user" id="id_user" value="<?= $id ?>">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="file" required accept="image/png, image/gif, image/jpeg" class="form-control" name="profile" id="profile" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-warning">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
             </div>
-            <div class="profile border bg-white my-3 p-3 card">
+            <div class="profile border bg-white my-2 p-3 card">
                 <h4>Password</h4>
                 <div class="d-flex justify-content-between">
                     <form action="<?= BASEURL ?>/setting/updtPassword" method="post">
@@ -51,11 +66,11 @@
                         ?>
                         <input type="hidden" name="id" value="<?= $data['user']["$id"] ?>">
                         <div class="mb-3">
-                            <label for="passwordOld" class="form-label">Password Lama</label>
+                            <label for="passwordOld" class="form-label">Password Sekarang</label>
                             <input type="password" name="old" class="form-control" required autocomplete="off" id="passwordOld">
                         </div>
                         <div class="mb-3">
-                            <label for="newPassword" class="form-label">Password Sekarang</label>
+                            <label for="newPassword" class="form-label">Password Baru</label>
                             <input type="password" name="new" class="form-control" required id="newPassword">
                         </div>
                         <div class="mb-3">
@@ -77,38 +92,7 @@
                     <h5 class="modal-title" id="forModalUser">Tambah Data Users</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="<?= BASEURL ?>/setting/updtAvatar" method="post" enctype="multipart/form-data">
-                    <?php
-                    if (isset($data['user']['role'])) {
-                        $id = $data['user']['id_user'];
-                    } else {
-                        $id = $data['user']['id_student'];
-                    }
-                    ?>
-                    <input type="hidden" name="id_user" id="id_user" value="<?= $id ?>">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <table class="table">
-                                            <tr>
-                                                <td width='100'>Profile</td>
-                                                <td width='1'>:</td>
-                                                <td><input type="file" required accept="image/png, image/gif, image/jpeg" class="form-control" name="profile" id="profile" value=""></td>
-                                            </tr>
 
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
 
             </div>
         </div>

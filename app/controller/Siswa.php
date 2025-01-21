@@ -8,8 +8,9 @@ class Siswa extends Controller
         Midleware::checkSiswa();
     }
 
-    public function index(){
-        header('Location:'.BASEURL.'/dashboard');
+    public function index()
+    {
+        header('Location:' . BASEURL . '/dashboard');
     }
     public function pembayaran()
     {
@@ -193,6 +194,4 @@ class Siswa extends Controller
         $data['pembayaran'] = $this->model('pembayaran_model')->getAllBillsById($id);
         $this->view('siswa/laporan', $data);
     }
-
-   
 }

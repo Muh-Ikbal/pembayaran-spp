@@ -69,7 +69,7 @@
                     <tr>
                         <td width="200">Guru </td>
                         <td>:</td>
-                        <td><?= $data['teacher']['name'] ?></td>
+                        <td><?= $data['teacher']['full_name'] ?></td>
                     </tr>
                     <tr>
                         <td>Nip </td>

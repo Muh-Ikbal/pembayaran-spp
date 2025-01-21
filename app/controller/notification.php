@@ -19,12 +19,10 @@ class Notification extends Controller
                     $dueDate = new DateTime($sem['tenggat_waktu']);
                     $currentDate = new DateTime();
                     $daysRemaining = $currentDate->diff($dueDate)->days;
-                    if ($daysRemaining > 0) {
-                        $unpaidSemesters[] = [
-                            'semester' => $sem['semester'],
-                            'days_remaining' => $daysRemaining
-                        ];
-                    }
+                    $unpaidSemesters[] = [
+                        'semester' => $sem['semester'],
+                        'days_remaining' => $daysRemaining
+                    ];
                 }
             }
 
@@ -47,12 +45,10 @@ class Notification extends Controller
                     $dueDate = new DateTime($sem['tenggat_waktu']);
                     $currentDate = new DateTime();
                     $daysRemaining = $currentDate->diff($dueDate)->days;
-                    if ($daysRemaining > 0) {
-                        $unpaidSemesters[] = [
-                            'semester' => $sem['semester'],
-                            'days_remaining' => $daysRemaining
-                        ];
-                    }
+                    $unpaidSemesters[] = [
+                        'semester' => $sem['semester'],
+                        'days_remaining' => $daysRemaining
+                    ];
                 }
             }
 

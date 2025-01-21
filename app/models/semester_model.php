@@ -56,9 +56,10 @@ class Semester_model
     public function updtSemester($data)
     {
         try {
-            $this->stmt = 'UPDATE ' . $this->table . ' SET semester=:semester WHERE id_semester=:id';
+            $this->stmt = 'UPDATE ' . $this->table . ' SET semester=:semester, tenggat_waktu =:tgl WHERE id_semester=:id';
             $this->db->query($this->stmt);
             $this->db->bind('semester', $data['semester']);
+            $this->db->bind('tgl', $data['due_date']);
             $this->db->bind('id', $data['id_semester']);
             $this->db->execute();
             return $this->db->rowCount();

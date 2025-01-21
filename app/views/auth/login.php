@@ -30,7 +30,7 @@
                         <div class="text-center mt-4">
                             <h1 class="h2">Aplikasi Pembayaran SPP</h1>
                             <p class="lead">
-                                Sign in to your account to continue
+                                Login Untuk Melanjutkan Proses
                             </p>
                         </div>
                         <div class="card">
